@@ -52,6 +52,9 @@ Plug 'vim-scripts/Vimball'
 "Processing support
 Plug 'sophacles/vim-processing'
 
+"Neovim run current file
+Plug 'sbdchd/vim-run'
+
 call plug#end()
 
 "Enhance YCM JS completion with tern's smarts
@@ -158,3 +161,22 @@ let g:cpp_class_decl_highlight = 1
 let g:arduino_dir='/usr/share/arduino'
 
 command W w !sudo tee % > /dev/null
+
+"Set single compile shortcuts
+nmap <F4> :SCCompile<cr>
+nmap <F5> :SCCompileRun<cr>
+
+"Always enter insert mode when entering neovim terminal
+autocmd TermOpen * startinsert
+"Remove line numbers on terminal
+autocmd TermOpen * setlocal nonumber norelativenumber
+
+"Open split windows on bottom
+set splitbelow
+
+"Create SplitTerminal command
+command! -nargs=* SplitTerminal split | terminal <args>
+
+"Detect C++ standard file headers and set their filtype accordingly
+au BufRead * if search('\M-*- C++ -*-', 'n', 1) | setlocal ft=cpp | endif
+
