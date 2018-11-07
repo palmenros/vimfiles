@@ -52,8 +52,7 @@ Plug 'vim-scripts/Vimball'
 "Processing support
 Plug 'sophacles/vim-processing'
 
-"Neovim run current file
-Plug 'sbdchd/vim-run'
+Plug 'palmenros/vim-cmake'
 
 call plug#end()
 
@@ -180,3 +179,15 @@ command! -nargs=* SplitTerminal split | terminal <args>
 "Detect C++ standard file headers and set their filtype accordingly
 au BufRead * if search('\M-*- C++ -*-', 'n', 1) | setlocal ft=cpp | endif
 
+"If we are on processing, remap exec buttons to make
+au BufNewFile,BufRead *.pde nmap <F4> :make<cr> 
+au BufNewFile,BufRead *.pde nmap <F5> :make<cr> 
+
+"Compatibility between Cmake and YCM
+let g:cmake_export_compile_commands = 1
+let g:cmake_ycm_symlinks = 1
+
+augroup plugin_initialize
+	autocmd!
+	autocmd VimEnter * exec 'CMakeInit'
+augroup END

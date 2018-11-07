@@ -78,7 +78,7 @@ function! SingleCompile#templates#cpp#Initialize()
         call SingleCompile#SetOutfile('cpp', 'bcc', g:SingleCompile_common_out_file)
     endif
     call SingleCompile#SetCompilerTemplate('cpp', 'g++',
-                \'GNU C++ Compiler', 'g++', '-g -o $(FILE_TITLE)$',
+                \'GNU C++ Compiler', 'g++', '-g -std=c++17 -o $(FILE_TITLE)$',
                 \g:SingleCompile_common_run_command)
     call SingleCompile#SetCompilerTemplateByDict('cpp', 'g++', {
                 \ 'pre-do'  : function('SingleCompile#PredoGcc'),
